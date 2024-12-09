@@ -1,39 +1,48 @@
 import { useState } from "react";
 import { ethers } from "ethers";
-
-export const useGeneric = (contract: any, provider: ethers.providers.Web3Provider | null, constant: any, usdtABI: any) => {
+import { constant } from "@/config/constants";
+import { usdtABI } from '@/config/usdtABI';
+import { useContract } from "@/contexts/ContractProvider";
+type UnknownObject = Record<string, any>;
+type ValueFields = Record<string, string | number>;
+export const useGeneric = () => {
     const [processing, setProcessing] = useState(false);
     const [convertionFailed, setConvertionFailed] = useState(false);
     const [approveSuccess, setApproveSuccess] = useState(false);
     const [resetSuccess, setResetSuccess] = useState(false);
     const [failed, setFailed] = useState(false);
     const [errorReason, setErrorReason] = useState("");
-
+    const { contract, provider } = useContract();
     const handleError = (error: any, tokenType: string) => {
         console.error(`Error with ${tokenType}:`, error);
         setErrorReason(error.message || "An unknown error occurred.");
     };
-
-    const getfuncTokenValue = async (func: string, value: string) => {
+    const getfuncTokenValue = async (func: string, value: UnknownObject, isGasLimit: boolean) => {
         if (!contract) return;
         try {
-            const usdtAmountBigNumber = ethers.utils.parseUnits(value, 6);
+            // const usdtAmountBigNumber = ethers.utils.parseUnits(value, 6);
+            const args = Object.values(value);
             if (typeof contract[func] !== "function") {
                 throw new Error(`Function ${func} does not exist on the contract`);
             }
-            const tokenAmount = await contract[func](usdtAmountBigNumber, { gasLimit: 500000 });
-            const tokenValue = Number(ethers.utils.formatUnits(tokenAmount, 6));
-            return tokenValue;
+            let res;
+            if (isGasLimit == true) {
+                const token = await contract[func](...args, { gasLimit: 500000 });
+                const receipt = await token.wait();
+                return { data: receipt, isGas: true };
+            } else {
+                res = await contract[func](...args);
+            }
+            const tokenValue = Number(ethers.utils.formatUnits(res, 6));
+            return { data: tokenValue, isGas: false };
         } catch (error: any) {
             console.error("Error fetching token value:", error);
             handleError(error, "USDT");
             setConvertionFailed(true);
         }
     };
-
     const funcCall = async (usdtValue: string) => {
         if (!contract || !provider) return;
-
         setProcessing(true);
         try {
             const usdtAmountBigNumber = ethers.utils.parseUnits(usdtValue, 6);
@@ -41,16 +50,13 @@ export const useGeneric = (contract: any, provider: ethers.providers.Web3Provide
             const signer = provider.getSigner();
             const signerAddress = await signer.getAddress();
             const usdtContract = new ethers.Contract(usdtAddress, usdtABI, signer);
-
             const usdtBalance = await usdtContract.balanceOf(signerAddress);
             if (usdtBalance.lt(usdtAmountBigNumber)) {
                 alert("Insufficient USDT balance.");
                 setFailed(true);
                 return;
             }
-
             const currentAllowance = await usdtContract.allowance(signerAddress, presaleAddress);
-
             if (currentAllowance.lt(usdtAmountBigNumber)) {
                 if (currentAllowance.gt(0)) {
                     const resetTx = await usdtContract.approve(presaleAddress, 0, { gasLimit: 100000 });
@@ -63,10 +69,8 @@ export const useGeneric = (contract: any, provider: ethers.providers.Web3Provide
                         return;
                     }
                 }
-
                 const approveTx = await usdtContract.approve(presaleAddress, usdtAmountBigNumber, { gasLimit: 100000 });
                 const approveReceipt = await approveTx.wait();
-
                 if (approveReceipt.status === 1) {
                     setApproveSuccess(true);
                 } else {
@@ -83,7 +87,6 @@ export const useGeneric = (contract: any, provider: ethers.providers.Web3Provide
             setProcessing(false);
         }
     };
-
     return {
         getfuncTokenValue,
         funcCall,
