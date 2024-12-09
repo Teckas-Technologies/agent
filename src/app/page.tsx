@@ -147,7 +147,7 @@ const Home = () => {
               <th className="px-4 py-2 text-black">Prompt</th>
               <th className="px-4 py-2 text-black">Code Snippet</th>
               <th className="px-4 py-2 text-black">Try it out</th>
-            </tr>
+            </tr> 
           </thead>
           <tbody>
             {agents.map((agent, index) => (
