@@ -16,4 +16,4 @@ export const constant = {
     presaleAddress,
     projectId,
     chainId
-}   
+}

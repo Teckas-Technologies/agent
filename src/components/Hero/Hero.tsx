@@ -216,8 +216,8 @@ export const Hero: React.FC = () => {
                 const tokenAmount = await contract[func](usdtAmountBigNumber,{ gasLimit: 500000 });  
                 console.log(tokenAmount);
                 // const tx = await contract.contributeUSDT(usdtAmountBigNumber, { gasLimit: 300000 });
-                const receipt = await tokenAmount.wait();
-                console.log(receipt);
+                   // const receipt = await tokenAmount.wait();
+                // console.log(receipt);
                 const tokenValue = Number(ethers.utils.formatUnits(tokenAmount, 6));
                 console.log("Token:", tokenValue)
                 return tokenValue;
@@ -232,19 +232,24 @@ export const Hero: React.FC = () => {
     }
 
     const funcCall = async()=>{
-        console.log("call")
+        console.log(contract);
         if (!contract) return;
         // alert("Buy button clicked");
         // if (processing) return;
 
         // setProcessing(true);
                 const usdtAmountBigNumber = ethers.utils.parseUnits("2", 6);
+                console.log(usdtAmountBigNumber)
                 // console.log(`USDT Value : ${value}`);
                 // console.log(`USDT BIG Number : ${usdtAmountBigNumber}`);
                 const usdtAddress = constant.usdtAddress;
+                console.log(usdtAddress)
                 const presaleAddress = constant.presaleAddress;
+                console.log(presaleAddress)
                 const signer = await provider?.getSigner();
+                console.log(signer)
                 const signerAddress = await signer?.getAddress();
+                console.log(signerAddress)
                 const usdtContract = new ethers.Contract(usdtAddress, usdtABI, signer);
                 console.log(usdtAddress,presaleAddress,signer,signerAddress,usdtContract);
                 const usdtBalance = await usdtContract.balanceOf(signerAddress);
@@ -736,19 +741,8 @@ export const Hero: React.FC = () => {
                                         </div>
                                       
                                         <div className="connect-wallet w-full flex justify-center items-center gap-[1rem] pt-4 pb-6">
-                                            <div className="connect-wallet-btn px-[5rem] py-[0.8rem] flex items-center gap-1 rounded-xl cursor-pointer"  onClick={()=>getfuncTokenValue("contributeUSDT","2")} >
+                                            <div className="connect-wallet-btn px-[5rem] py-[0.8rem] flex items-center gap-1 rounded-xl cursor-pointer"  onClick={()=>getfuncTokenValue("usdtToTokens","1")} >
                                                 <h2 className='font-semibold text-lg text-black'>Get token</h2>
-                                                {!processing ?
-                                                    <InlineSVG
-                                                        src="/icons/right-arrow.svg"
-                                                        className="w-4 h-4"
-                                                    /> :
-                                                    <div className='loader ml-3'></div>}
-                                            </div>
-                                        </div>
-                                        <div className="connect-wallet w-full flex justify-center items-center gap-[1rem] pt-4 pb-6">
-                                            <div className="connect-wallet-btn px-[5rem] py-[0.8rem] flex items-center gap-1 rounded-xl cursor-pointer"  onClick={funcCall} >
-                                                <h2 className='font-semibold text-lg text-black'>Get</h2>
                                                 {!processing ?
                                                     <InlineSVG
                                                         src="/icons/right-arrow.svg"
