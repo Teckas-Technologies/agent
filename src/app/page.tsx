@@ -14,6 +14,8 @@ type Agent = {
   agentName: string;
   prompt: string;
   codeSnippet: string;
+  contractAddress:string;
+  abi:string;
 };
 
 const Home = () => {
@@ -25,6 +27,8 @@ const Home = () => {
   const [prompt, setPrompt] = useState('');
   const [error, setError] = useState('');
   const [snippet, setSnippet] = useState('');
+  const [contractAddress, setContractAddress] = useState('');
+  const [abi, setAbi] = useState('');
   const [created, setCreated] = useState(false);
   const { developerId, setDeveloperId } = useDeveloper();
   console.log("Dev Id home:", developerId)
@@ -71,9 +75,11 @@ const Home = () => {
         developerId,
         agentName,
         prompt,
+        contractAddress,
+        abi,
       });
       setSnippet(response.data.codeSnippet);
-      setAgents([...agents, { agentName, prompt, codeSnippet: response.data.codeSnippet }]);
+      setAgents([...agents, { agentName, prompt, contractAddress, abi, codeSnippet: response.data.codeSnippet }]);
       setAgentName('');
       setPrompt('');
     } catch (err) {
