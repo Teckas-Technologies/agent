@@ -1,0 +1,6 @@
+{
+    "type": "create-transaction",
+    "amount": 100,
+    "currency": "USD"
+  }
+  

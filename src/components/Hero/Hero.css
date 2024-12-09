@@ -1,0 +1,198 @@
+.connect-wallet-btn {
+    background: linear-gradient(90deg, #BBFDFF 0%, #5DCCCF 100%);
+    position: relative;
+    pointer-events: auto;
+}
+
+.connect-wallet {
+    pointer-events: auto;
+}
+
+.running {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee {
+    display: inline-block;
+    padding-left: 20%;
+    animation: marquee 12s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.bg {
+    background-image: url('/images/bg-logo.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+}
+
+.layer2 {
+    /* background: #03C8CF33;
+    backdrop-filter: blur(375px) */
+    background: radial-gradient(ellipse 100% 80% at top center, #03C8CF33 10%, #000000 100%);
+}
+
+.top-intro {
+    background: radial-gradient(ellipse 100% 50% at center, #03C8CF33 30%, #000000 100%);
+}
+
+.first-btn {
+    border: 1.27px solid #BBFDFF;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.15) 100%);
+}
+
+.first-text {
+    color: #BBFDFF;
+}
+
+.intro-text {
+    background: linear-gradient(180deg, #FFFFFF 44%, #BBFDFF 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.first-para {
+    color: #FFFFFFAB;
+}
+
+.join-text {
+    color: #C4C4C4;
+}
+
+.right-outer {
+    background: linear-gradient(310.3deg, #000000 57.94%, #666666 82.89%);
+    padding: 1px;
+}
+
+.right-box {
+    /* border: 1px solid #C4C4C4; */
+    /* border: 0.75px solid transparent;
+  border-image: linear-gradient(310.3deg, #000000 57.94%, #666666 82.89%);
+  border-image-slice: 1;
+  border-radius: 20px; */
+    /* background: #FFFFFF0D; */
+    background: linear-gradient(135deg, rgba(3, 200, 207, 0.33) 0%, rgba(0, 0, 0, 0.3) 80%);
+}
+
+.timer {
+    border: 0.75px solid #535353
+}
+
+.right-top-text {
+    color: #E6E6E6;
+}
+
+.span-bold {
+    color: #BBFDFF;
+}
+
+.span {
+    color: #E6E6E6;
+}
+
+.supply-btn,
+.price-btn {
+    border: 1.27px solid #BBFDFF;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.15) 100%);
+}
+
+.usdt-pay {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 100%);
+}
+
+.eth-pay {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 100%);
+}
+
+.radio {
+    border: 0.75px solid #FFFFFF
+}
+
+.from-token {
+    /* border: 1.27px solid #BBFDFF; */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.15) 100%);
+}
+
+.placeholder-ed::placeholder {
+    color: #ED2121;
+}
+
+.placeholder-bb::placeholder {
+    color: #BBFDFF78;
+}
+
+.to {
+    border: 1.27px solid #BBFDFF;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.15) 100%);
+}
+
+.to input::placeholder {
+    color: #BBFDFF78;
+}
+
+.from-token input:focus::placeholder {
+    color: #BBFDFF;
+}
+
+.from-token input {
+    color: #BBFDFF;
+}
+
+/* .connect-wallet-btn {
+    background: linear-gradient(90deg, #BBFDFF 0%, #5DCCCF 100%);
+} */
+
+/* Spinner loader */
+.loader {
+    border: 4px solid #BBFDFF;
+    border-top: 4px solid #000000;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    animation: spin 1s linear infinite;
+}
+
+/* Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+.from-token input[type="number"]::-webkit-outer-spin-button,
+.from-token input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.from-token input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Remove arrows on hover/focus */
+.from-token input[type="number"]:hover,
+.from-token input[type="number"]:focus {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}

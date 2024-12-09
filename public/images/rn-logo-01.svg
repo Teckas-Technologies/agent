@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 705 221">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2, .cls-3 {
+        isolation: isolate;
+      }
+
+      .cls-3 {
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-size: 103px;
+        font-weight: 600;
+      }
+
+      .cls-4 {
+        fill: #008b62;
+      }
+
+      .cls-4, .cls-5 {
+        stroke-width: 0px;
+      }
+
+      .cls-5 {
+        fill: #5bbe91;
+      }
+    </style>
+  </defs>
+  <path class="cls-4" d="M128.6,120.8l49.8-49.8c3.7-3.7,5.8-8.8,5.8-14.1l.1-40.2c0-2.1-.8-4-2.2-5.5l-95.5,95.5c-7.8,7.7-7.8,20.3-.1,28l.1.1,67.4,67.3c7.8,7.7,20.4,7.7,28-.1,7.7-7.8,7.7-20.4-.1-28.1l-53.3-53.1Z"/>
+  <path class="cls-5" d="M176.5,9.1H26.4c-12.1,0-21.1,9.2-21.1,21.7v156.9c-.1,11.1,8.7,20.1,19.7,20.3h.5c10.9.2,20-8.6,20.2-19.5V47.8h99.9l36.6-36.5c-1.6-1.4-3.6-2.2-5.7-2.2Z"/>
+  <g class="cls-2">
+    <text class="cls-3" transform="translate(239.29 84.87)"><tspan x="0" y="0">Request</tspan></text>
+    <text class="cls-3" transform="translate(239.29 187.87)"><tspan class="cls-1" x="0" y="0">A</tspan><tspan x="76.63" y="0">gents</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-1-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* For WebKit Browsers (e.g., Chrome, Safari) */
+.agent-instructions::-webkit-scrollbar,
+.messages::-webkit-scrollbar,
+.agents-scroll-list::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.agent-instructions::-webkit-scrollbar-track,
+.messages::-webkit-scrollbar-track,
+.agents-scroll-list::-webkit-scrollbar-track {
+  background: #f3f3f3; 
+  border-radius: 4px; 
+}
+
+.agent-instructions::-webkit-scrollbar-thumb,
+.messages::-webkit-scrollbar-thumb,
+.agents-scroll-list::-webkit-scrollbar-thumb {
+  background-color: #1fbf97df; 
+  border-radius: 1rem; 
+  border: 2px solid #f3f3f3; 
+}
+
+/* For Modern Browsers */
+/* .agents-scroll-list {
+  scrollbar-width: thin; 
+  scrollbar-color: #1fbf96 #f3f3f3; 
+} */
