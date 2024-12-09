@@ -18,6 +18,7 @@ import { usePayRequest } from "@/hooks/usePayRequests";
 import Toast from "../Toast";
 import { parseUnits } from "viem";
 import Copied from "../Copied";
+import { useGeneric } from "@/hooks/useGeneric";
 
 interface Props {
     agent: Agent | null;
@@ -55,6 +56,8 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
 
     const [activePayingId, setActivePayingId] = useState("");
     const [paid, setPaid] = useState(false);
+
+    const { funcCall, getfuncTokenValue } = useGeneric();
 
     useEffect(() => {
         if (activePayingId && paid) {
@@ -216,8 +219,23 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                 }
 
                 setMessages((prev) => [...prev, { sender: "assistant", message: `Executing function: ${functionName}!` }]);
-                // setIsCreating(true);
-                alert("Function Calling....")
+                setIsCreating(true);
+
+                const res = await getfuncTokenValue(functionName, parameters, gasLimit);
+
+                console.log("RES:", res);
+
+                if(res?.isGas) {
+                    console.log("RES1:", res.data)
+                    setIsCreating(false);
+                }
+
+                if(!res?.isGas && res) {
+                    console.log("RES2:", res.data)
+                    setIsCreating(false);
+                }
+
+
 
                 // console.log("amount", response.data.data.meta_data.amount.trim());
 
@@ -251,7 +269,8 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                     setMessages((prev) => [...prev, { sender: "assistant", message: "Please connect your wallet!" }]);
                     return;
                 }
-                alert("Approving....")
+                const res = await funcCall("5");
+                console.log("RES:", res)
 
             } else {
                 setMessages((prev) => [...prev, assistantMessage]);
