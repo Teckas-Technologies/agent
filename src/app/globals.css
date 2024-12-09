@@ -53,7 +53,7 @@ body {
 .agent-instructions::-webkit-scrollbar-thumb,
 .messages::-webkit-scrollbar-thumb,
 .agents-scroll-list::-webkit-scrollbar-thumb {
-  background-color: #1fbf97df; 
+  background-color: black; 
   border-radius: 1rem; 
   border: 2px solid #f3f3f3; 
 }

@@ -194,21 +194,20 @@ const SPABody: React.FC<Props> = ({ developerId, created, setCreated }) => {
                         />
                     </div>
                     <div className="input-field border p-3 mb-3 rounded-md border-grey-800">
-                        <label htmlFor="abi" className="text-zinc-700 dark:text-black">Abi</label>
-                        <input
-                            type="text"
+                        <label htmlFor="abi" className="text-zinc-700 dark:text-black">ABI</label>
+                        <textarea
                             name="abi"
                             value={abi}
                             onChange={(e) => setAbi(e.target.value)}
-                            placeholder="Enter the abi address..."
-                            className="w-full px-3 py-2 mb-4 border rounded-md mt-2 text-black border-grey-800 outline-none"
+                            placeholder="Paste the contract ABI..."
+                            className="w-full px-3 py-2 mt-2 h-[10rem] mb-4 border border-grey-800 outline-none rounded-md text-black"
                         />
                     </div>
                     <div className="create-btn-section flex items-center gap-5">
                         <button
                             disabled={disabled}
                             onClick={handleCreateAgent}
-                            className={`w-auto bg-black backdrop-blur supports-[backdrop-filter]:bg-mb-black/60 text-white py-2 px-5 rounded-md hover:bg-[#1fbf96] ${disabled && "cursor-not-allowed"}`}
+                            className={`w-auto bg-black backdrop-blur supports-[backdrop-filter]:bg-mb-black/60 text-white py-2 px-5 rounded-md ${disabled && "cursor-not-allowed"}`}
                         >
                             <h2 className="font-semibold ">Submit</h2>
                         </button>
