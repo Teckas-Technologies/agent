@@ -53,12 +53,13 @@ const SPABody: React.FC<Props> = ({ developerId, created, setCreated }) => {
     const handleCreateAgent = async () => {
         try {
             setLoading(true);
+            const stringifiedJson = JSON.stringify(abi);
             const response = await axios.post('/api/agents', {
                 developerId,
                 agentName,
                 prompt,
                 contractAddress,
-                abi,
+                abi: stringifiedJson,
             });
             console.log("Response:", response)
             if (response.status === 201) {

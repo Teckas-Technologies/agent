@@ -25,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     await connectToDatabase();
     if (!developerId || !agentName || !prompt || !contractAddress || !abi) {
+      console.log(developerId, agentName, prompt, contractAddress, abi)
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -51,10 +52,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log("Saved Response:", )
 
       // Prepare data to send to external server
-      const externalServerURL = 'https://rnp-master-agent-d2b5etd8cwgzcaer.canadacentral-01.azurewebsites.net/store-agent-spec';
+      const externalServerURL = 'https://abi-master-agent-dgcmghddard0h8d2.canadacentral-01.azurewebsites.net/store-agent-spec';
       const requestData = {
         agentId: savedAgent._id.toString(),
         agentSpec: prompt,  // The 'prompt' field is used as agentSpec
+        agentABI: abi,
+        contract: contractAddress
       };
 
       console.log("savedAgent:", savedAgent)
