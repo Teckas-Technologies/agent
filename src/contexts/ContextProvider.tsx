@@ -27,7 +27,7 @@ const modal = createAppKit({
     adapters: [wagmiAdapter],
     projectId,
     networks: [mainnet, arbitrum, sepolia],
-    defaultNetwork: mainnet,
+    defaultNetwork: sepolia,
     metadata: metadata,
     allWallets: "SHOW",
     features: {
