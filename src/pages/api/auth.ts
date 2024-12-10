@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     if (req.method === 'POST') {
+      await connectToDatabase();
       let developer = await Developer.findOne({ email });
 
       if (developer) {
