@@ -248,7 +248,7 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                 }
                 setMessages((prev) => [...prev, { sender: "assistant", message: String("Executing Approval...") }]);
                 setIsCreating(true);
-                const res = await funcCall("5");
+                const res = await funcCall("100");
                 setMessages((prev) => [...prev, { sender: "assistant", message: `Approval Executed Successfully!` }]);
                 setIsCreating(true);
 
