@@ -69,7 +69,7 @@ const SPABody: React.FC<Props> = ({ developerId, created, setCreated }) => {
                 setToastMessage("Agent Created Successfully!");
                 setCreated(!created);
                 setSnippet(response.data.codeSnippet);
-                setAgents([...agents, { agentName, prompt, contractAddress, abi,codeSnippet: response.data.codeSnippet }]);
+                setAgents([...agents, { agentName, prompt, contractAddress, abi, codeSnippet: response.data.codeSnippet }]);
                 setAgentName('');
                 setPrompt('');
                 setContractAddress('');
@@ -99,13 +99,13 @@ const SPABody: React.FC<Props> = ({ developerId, created, setCreated }) => {
     };
     const disabled = loading || !agentName || !prompt || !contractAddress || !abi;
     return (
-        <div className="spa-body w-full h-auto flex flex-wrap md:grid md:grid-cols-5 gap-5 md:px-[1.2rem] px-3 py-5 md:pt-[6.2rem] pt-[5.8rem]">
-            <div className="left-doc-content w-full md:col-span-2 py-5 md:px-5 px-3 bg-white rounded-lg">
+        <div className="spa-body w-full h-auto flex flex-wrap md:grid md:grid-cols-6 gap-5 md:px-[1.2rem] px-3 py-5 md:pt-[6.2rem] pt-[5.8rem]">
+            <div className="left-doc-content w-full md:col-span-3 py-5 md:px-5 px-3 bg-white rounded-lg">
                 <h1 className="text-xl dark:text-black font-bold mb-4">Steps to create an agent:</h1>
                 <h2 className="text-lg dark:text-black font-semibold mb-2">1. Provide the following details:</h2>
                 <ul className="list-disc pl-6 mb-2">
                     <li className="dark:text-black">
-                        <strong className="dark:text-black">Agent Name:</strong> A descriptive name for your agent (e.g., "Invoice Agent").
+                        <strong className="dark:text-black">Agent Name:</strong> A descriptive name for your agent (e.g., "MYID Presale Agent").
                     </li>
                     {/* <li>
                         <strong>Agent Description:</strong> Briefly describe what the agent will do (e.g., "Manages invoices and payments").
@@ -114,7 +114,7 @@ const SPABody: React.FC<Props> = ({ developerId, created, setCreated }) => {
                         <strong className="dark:text-black">Agent Prompt:</strong> Instructions for your agent. For example:
                         <div className="relative bg-gray-100 p-4 mt-2 rounded-md border border-gray-300">
                             <code className="code-content block font-mono whitespace-pre-wrap dark:text-black">
-                                You are an assistant to help users to create an invoice and fetch their invoices. If the user wants to create an invoice, use the create-payment-request tool. If the user wants to fetch their invoices, use the fetch-payment-request tool.
+                                You are an assistant to help users to contribute USDT or contribute ETH to get the MYID tokens. Descriptions: constructor - Initializes the contract. ContributedETH (event) - Emitted when ETH is contributed to the contract. ContributedUsdt (event) - Emitted when USDT is contributed to the contract. OwnershipTransferred (event) - Emitted when ownership of the contract is transferred. assetsBalance - Returns the current balances of USDT and ETH in the contract. balancesOf - Retrieves detailed balance information for a specific address. boughtTokens - Returns the total number of tokens bought by a specific address. chainLink - Provides the address of the ChainLink contract used for price feeds or other integrations. contributeEth - Allows users to contribute ETH to the contract (payable function). contributeUSDT - Allows users to contribute USDT to the contract. usdtToTokens - Converts a specified USDT amount to the equivalent number of tokens.
                             </code>
                             <div onClick={copyToClipboard} className="copy absolute h-7 w-7 top-2 right-2 border border-zinc-800 flex items-center justify-center rounded-md cursor-pointer">
                                 <InlineSVG
@@ -123,6 +123,12 @@ const SPABody: React.FC<Props> = ({ developerId, created, setCreated }) => {
                                 />
                             </div>
                         </div>
+                    </li>
+                    <li className="dark:text-black mt-1">
+                        <strong className="dark:text-black">Contract Address:</strong> Address of your contract. (eg: - 0x3D95D9285742b50...............3D549a723A)
+                    </li>
+                    <li className="dark:text-black mt-1">
+                        <strong className="dark:text-black">ABI:</strong> ABI json of your contract. 
                     </li>
                 </ul>
                 <p className="text-base dark:text-black">
