@@ -16,8 +16,8 @@ if (!projectId) {
 
 // Set up metadata
 const metadata = {
-    name: 'request-agents',
-    description: 'Request Agents',
+    name: 'Agentify',
+    description: 'Agentify',
     url: 'https://request-protocol-bot.vercel.app/', // origin must match your domain & subdomain
     icons: ['images/request-network-logo.png']
 }

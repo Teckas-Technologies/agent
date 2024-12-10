@@ -39,7 +39,7 @@ const Home = () => {
     try {
       const response = await axios.post('/api/auth', { email, password });
       setDeveloperId(response.data.developerId);
-      localStorage.setItem('developerId', response.data.developerId);
+      // localStorage.setItem('developerId', response.data.developerId);
     } catch (err) {
       setError('Authentication failed. Please check your credentials.');
       console.error('Error:', err);
