@@ -44,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const savedAgent = await agent.save();
       // <Script id="chatbot" src="https://script-sepia.vercel.app/ChatBot.js" data-agent-id="6751bbe4b078ade1be331d7b" data-account-id={address}  data-wallet-client={JSON.stringify(walletClient)}></Script>
-      const codeSnippet = `<script id="chatbot" src="https://script-sepia.vercel.app/ChatBot.js" data-agent-id="${savedAgent._id}"></script>`
+      const codeSnippet = `<script id="chatbot" src="https://abi-script.vercel.app/ChatBot.js" data-agent-id="${savedAgent._id}"></script>`
       // const codeSnippet = `<script src="https://cdn.request-protocol.com/bot.js" data-id="${savedAgent._id}"></script>`;
       savedAgent.codeSnippet = codeSnippet;
       await savedAgent.save();
