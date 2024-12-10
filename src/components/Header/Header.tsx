@@ -61,8 +61,8 @@ const Header: React.FC<Props> = ({created}) => {
     return (
         <div className="header fixed z-50 w-full bg-white h-[5rem] flex items-center justify-between md:px-[1.2rem] px-3">
             <div className="header-left flex items-center justify-start gap-[4rem]">
-                <div className="logo-img w-[10rem] h-[3rem] cursor-pointer" onClick={() => router.push("/")}>
-                    <img src="images/new-rn-logo.png" alt="logo" className="w-full h-full object-contain" />
+                <div className="logo-img w-[8rem] h-[4rem] cursor-pointer rounded-md" onClick={() => router.push("/")}>
+                    <img src="images/agentify-logo-wide.jpg" alt="logo" className="w-full h-full object-cover rounded-md" />
                 </div>
                 <div className="navs flex items-center h-full gap-[2rem] md:flex hidden">
                     <div className="relative create-nav w-auto h-[5rem] flex items-center justify-center cursor-pointer" onClick={() => router.push("/")}>
