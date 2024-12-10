@@ -36,6 +36,14 @@ body {
   text-overflow: ellipsis;
 }
 
+.truncate-6-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* For WebKit Browsers (e.g., Chrome, Safari) */
 .agent-instructions::-webkit-scrollbar,
 .messages::-webkit-scrollbar,

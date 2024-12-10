@@ -60,7 +60,7 @@ const AgentList: React.FC<Props> = ({ agents }) => {
                     {agents.map((agent, index) => (
                         <tr className="border-t">
                             <td className="px-4 py-2 text-black md:min-w-[10rem] min-w-[7rem]">{agent.agentName}</td>
-                            <td className={`px-4 py-2 text-black ${isMobile && "hidden"}`}>{agent.prompt}</td>
+                            <td className={`px-4 my-2 text-black truncate-6-lines ${isMobile && "hidden"}`}>{agent.prompt}</td>
                             <td className={`px-4 py-2 text-black ${isMobile && "hidden"}`}>
                                 <div className="bg-gray-100 p-2 rounded-md border border-gray-300 cursor-pointer" onClick={() => copyToClipboard(agent.codeSnippet)}>
                                     <code className="snippet-content block font-mono whitespace-pre-wrap">
