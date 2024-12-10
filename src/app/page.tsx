@@ -46,12 +46,12 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    const savedDeveloperId = localStorage.getItem('developerId');
-    if (savedDeveloperId) {
-        setDeveloperId(savedDeveloperId);
-    }
-}, []);
+//   useEffect(() => {
+//     const savedDeveloperId = localStorage.getItem('developerId');
+//     if (savedDeveloperId) {
+//         setDeveloperId(savedDeveloperId);
+//     }
+// }, []);
 
   const fetchAgents = async (id: string) => {
     try {
