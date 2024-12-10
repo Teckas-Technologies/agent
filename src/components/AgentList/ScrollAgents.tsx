@@ -51,8 +51,8 @@ const ScrollAgents: React.FC<Props> = ({ agents, onAgentClick }) => {
                             className={`agent border py-2 rounded-lg cursor-pointer ${isSelected ? "border-black" : "border-grey-800"}`}
                         >
                             <div className="top px-2 pb-1 flex items-center gap-2">
-                                <div className="rn-logo w-[2rem] h-[2rem] p-2 bg-gray-200 rounded-full">
-                                    <img src="images/logo-sm.svg" alt="logo" className="w-full h-full object-cover" />
+                                <div className="rn-logo w-[2rem] h-[2rem] bg-gray-200 rounded-full">
+                                    <img src="images/agentify-logo.jpg" alt="logo" className="w-full h-full object-cover rounded-full" />
                                 </div>
                                 <h2 className="text-md text-black dark:text-black truncate-1-lines">{agent.agentName}</h2>
                             </div>

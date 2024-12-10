@@ -279,7 +279,7 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                 <div className="top-chat w-full flex justify-between items-center h-[3rem] py-2">
                     <div className="agent-info flex items-center gap-2">
                         <div className="rn-logo w-[2rem] h-[2rem] p-2 bg-gray-200 rounded-full">
-                            <img src="images/logo-sm.svg" alt="logo" className="w-full h-full object-cover" />
+                            <img src="images/agentify-logo.jpg" alt="logo" className="w-full h-full object-cover rounded-full" />
                         </div>
                         <h2 className="dark:text-black">{agent?.agentName}</h2>
                     </div>
