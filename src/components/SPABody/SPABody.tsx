@@ -141,7 +141,7 @@ const SPABody: React.FC<Props> = ({ developerId, created, setCreated }) => {
                 <div className="relative bg-gray-100 p-4 rounded-md border border-gray-300 mb-2">
                     <code className="code-content dark:text-black block font-mono whitespace-pre-wrap">
                         &lt;Script id="chatbot"
-                        src="https://script-sepia.vercel.app/ChatBot.js"
+                        src="https://abi-script.vercel.app/ChatBot.js"
                         data-agent-id="&lt;!-- Your Agent Id --&gt;"&gt;&lt;/Script&gt;
                     </code>
                 </div>

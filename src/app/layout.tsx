@@ -20,8 +20,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Request Agents",
-  description: "Manage and interact with your AI-powered agents effortlessly using the Request Agents platform. Customize, chat, and get insights tailored to your needs.",
+  title: "Agentify",
+  description: "Manage and interact with your AI-powered agents effortlessly using the Agentify platform. Customize, chat, and get insights tailored to your needs.",
 };
 
 export default function RootLayout({
