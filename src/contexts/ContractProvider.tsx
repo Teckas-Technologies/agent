@@ -10,7 +10,7 @@ import { EthereumProvider } from "@walletconnect/ethereum-provider";
 
 declare global {
     interface Window {
-        ethereum?:  Record<string, unknown> | undefined;
+        ethereum?: Record<string, unknown> | undefined;
     }
 }
 
@@ -56,6 +56,15 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
         }
     }, [isConnected, address, contract]);
 
+    useEffect(() => {
+        if (typeof window === "undefined" || !window.ethereum) {
+            console.error("MetaMask is not installed or `window.ethereum` is not available.");
+            alert("MetaMask is not installed. Please install MetaMask to connect.");
+            return;
+        }
+    }, []);
+
+
     // useEffect(() => {
     //     if (isConnected && ethers && address && typeof window !== "undefined" && window.ethereum) {
     //         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -71,8 +80,12 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
             if (isConnected && address) {
                 if (window.ethereum && typeof window !== "undefined") {
                     try {
+                        console.log("STEP1")
                         const provider = new ethers.providers.Web3Provider(window.ethereum);
+                        await provider.send('eth_requestAccounts', []);
                         const signer = provider.getSigner();
+                        const userAddress = await signer.getAddress();
+                        console.log("USER ADDRESS:", userAddress)
                         const contractInstance = new ethers.Contract(MYIDPresaleAddress, MYIDPresaleABI, signer);
                         setProvider(provider);
                         setContract(contractInstance);
@@ -82,6 +95,7 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
                 } else {
                     // Fallback to WalletConnect when MetaMask is not detected
                     try {
+                        console.log("STEP2")
                         const walletConnectProvider = await EthereumProvider.init({
                             projectId: constant.projectId,
                             chains: [constant.chainId as number], // Mainnet
@@ -89,6 +103,7 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
                         });
 
                         const provider = new ethers.providers.Web3Provider(walletConnectProvider);
+                        await provider.send('eth_requestAccounts', []);
                         const signer = provider.getSigner();
                         const contractInstance = new ethers.Contract(MYIDPresaleAddress, MYIDPresaleABI, signer);
                         setProvider(provider);

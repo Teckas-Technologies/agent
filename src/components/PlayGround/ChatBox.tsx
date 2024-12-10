@@ -238,7 +238,9 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                         console.log("RES2:", res?.data);
                         setIsCreating(false);
                     }
+                    setIsCreating(false);
                 } else {
+                    setIsCreating(false);
                     setMessages((prev) => [...prev, { sender: "assistant", message: "Function call execution failed!" }]);
                 }
 
@@ -251,7 +253,7 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                 setIsCreating(true);
                 const res = await funcCall("100");
                 setMessages((prev) => [...prev, { sender: "assistant", message: `Approval Executed Successfully!` }]);
-                setIsCreating(true);
+                setIsCreating(false);
 
             } else {
                 setMessages((prev) => [...prev, assistantMessage]);

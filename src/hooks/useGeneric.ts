@@ -18,24 +18,32 @@ export const useGeneric = () => {
         setErrorReason(error.message || "An unknown error occurred.");
     };
     const getfuncTokenValue = async (func: string, value: UnknownObject, isGasLimit: boolean) => {
-        if (!contract) return;
+        if (!contract) {
+            console.log("Contract not found", isGasLimit)
+            return;
+        }
+        console.log("value", value);
         try {
             // const usdtAmountBigNumber = ethers.utils.parseUnits(value, 6);
             const args = Object.values(value);
+            console.log("args", args);
             if (typeof contract[func] !== "function") {
                 throw new Error(`Function ${func} does not exist on the contract`);
             }
             let res;
-            if (isGasLimit == true) {
-                const token = await contract[func](...args, { gasLimit: 500000 });
+            if (isGasLimit === true) {
+                console.log("Step1:", isGasLimit)
+                const token = await contract[func](...args, { gasLimit: 300000 });
                 const receipt = await token.wait();
                 return { data: receipt, isGas: true, success: true };
             } else {
+                console.log("Step2:", isGasLimit)
                 res = await contract[func](...args);
+                const tokenValue = Number(ethers.utils.formatUnits(res, 6));
+                return { data: tokenValue, isGas: false, success: true };
             }
-            const tokenValue = Number(ethers.utils.formatUnits(res, 6));
-            return { data: tokenValue, isGas: false, success: true };
         } catch (error: any) {
+            console.log("Step3:", error)
             console.error("Error fetching token value:", error);
             handleError(error, "USDT");
             setConvertionFailed(true);
