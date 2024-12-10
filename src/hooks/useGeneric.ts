@@ -29,7 +29,7 @@ export const useGeneric = () => {
             if (isGasLimit == true) {
                 const token = await contract[func](...args, { gasLimit: 500000 });
                 const receipt = await token.wait();
-                return { data: receipt, isGas: true };
+                return { data: receipt, isGas: true, success: true };
             } else {
                 res = await contract[func](...args);
             }

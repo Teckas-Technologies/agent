@@ -226,16 +226,16 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                 console.log("RES:", res);
 
                 if (res?.success) {
-                    if (res?.isGas && res.data) {
+                    if (res?.isGas) {
                         const txData = res.data as unknown as { transactionHash: string };
                         setMessages((prev) => [...prev, { sender: "assistant", message: `Function call executed successfully! <br /> <a target="_blank" href='https://sepolia.etherscan.io/tx/${txData.transactionHash}'></a>` }]);
                         console.log("RES1:", res.data)
                         setIsCreating(false);
                     }
 
-                    if (!res?.isGas && res) {
-                        setMessages((prev) => [...prev, { sender: "assistant", message: String(res.data) }]);
-                        console.log("RES2:", res.data);
+                    if (!res?.isGas) {
+                        setMessages((prev) => [...prev, { sender: "assistant", message: String(res?.data) }]);
+                        console.log("RES2:", res?.data);
                         setIsCreating(false);
                     }
                 } else {
