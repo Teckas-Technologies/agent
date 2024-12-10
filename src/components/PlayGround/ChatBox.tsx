@@ -218,59 +218,39 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                     return;
                 }
 
-                setMessages((prev) => [...prev, { sender: "assistant", message: `Executing function: ${functionName}!` }]);
+                setMessages((prev) => [...prev, { sender: "assistant", message: `Executing function: ${functionName}...` }]);
                 setIsCreating(true);
 
                 const res = await getfuncTokenValue(functionName, parameters, gasLimit);
 
                 console.log("RES:", res);
 
-                if(res?.isGas) {
-                    console.log("RES1:", res.data)
-                    setIsCreating(false);
+                if (res?.success) {
+                    if (res?.isGas) {
+                        setMessages((prev) => [...prev, { sender: "assistant", message: "Function call executed successfully!" }]);
+                        console.log("RES1:", res.data)
+                        setIsCreating(false);
+                    }
+
+                    if (!res?.isGas && res) {
+                        setMessages((prev) => [...prev, { sender: "assistant", message: String(res.data) }]);
+                        console.log("RES2:", res.data);
+                        setIsCreating(false);
+                    }
+                } else {
+                    setMessages((prev) => [...prev, { sender: "assistant", message: "Function call execution failed!" }]);
                 }
 
-                if(!res?.isGas && res) {
-                    console.log("RES2:", res.data)
-                    setIsCreating(false);
-                }
-
-
-
-                // console.log("amount", response.data.data.meta_data.amount.trim());
-
-                // const created = await createRequest({
-                //     recipientAddress: address.trim() || "",
-                //     currency: currencyKey.trim(),
-                //     payerAddress: payerIdentity.trim(),
-                //     amount: response.data.data.meta_data.amount.trim(),
-                //     storageChain: "11155111",
-                //     dueDate: formattedDueDate,
-                //     reason: response.data.data.meta_data.reason,
-                //     extra: response.data.data.meta_data.extra
-                // })
-
-                // if (created?.success) {
-                //     setMessages((prev) => [...prev, {
-                //         sender: "assistant", message: `
-                //         ${response.data.data.text}
-                //         <div hidden>Request Created</div>
-                //         <span hidden>${created.data.confirmedRequestData?.requestId.trim()}</span>
-                //         ` }]);
-                //     setIsCreating(false);
-                //     return;
-                // } else {
-                //     setMessages((prev) => [...prev, { sender: "assistant", message: "You request creation has been failed, Please try again later!" }]);
-                //     setIsCreating(false);
-                //     return;
-                // }
             } else if (response.data.data.intent === "get_approve") {
                 if (!address || !isConnected) {
                     setMessages((prev) => [...prev, { sender: "assistant", message: "Please connect your wallet!" }]);
                     return;
                 }
+                setMessages((prev) => [...prev, { sender: "assistant", message: String("Executing Approval...") }]);
+                setIsCreating(true);
                 const res = await funcCall("5");
-                console.log("RES:", res)
+                setMessages((prev) => [...prev, { sender: "assistant", message: `Approval Executed Successfully!` }]);
+                setIsCreating(true);
 
             } else {
                 setMessages((prev) => [...prev, assistantMessage]);

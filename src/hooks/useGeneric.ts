@@ -34,11 +34,12 @@ export const useGeneric = () => {
                 res = await contract[func](...args);
             }
             const tokenValue = Number(ethers.utils.formatUnits(res, 6));
-            return { data: tokenValue, isGas: false };
+            return { data: tokenValue, isGas: false, success: true };
         } catch (error: any) {
             console.error("Error fetching token value:", error);
             handleError(error, "USDT");
             setConvertionFailed(true);
+            return { data: null, isGas: false, success: false };
         }
     };
     const funcCall = async (usdtValue: string) => {

@@ -137,7 +137,7 @@ const Home = () => {
       <div className="agents-section md:px-[7rem] px-3">
         <AgentList agents={agents} />
       </div>
-      <Hero/>
+      {/* <Hero/> */}
       {/* <div className="max-w-4xl mx-auto"> */}
       {/* <h1 className="text-2xl font-bold mb-6 text-black">Your Agents</h1> */}
       {/* <table className="w-full table-auto bg-white shadow-md rounded-md mb-6 text-black">
