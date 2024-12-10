@@ -57,62 +57,39 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
     }, [isConnected, address, contract]);
 
     useEffect(() => {
-        if (typeof window === "undefined" || !window.ethereum) {
-            console.error("MetaMask is not installed or `window.ethereum` is not available.");
-            alert("MetaMask is not installed. Please install MetaMask to connect.");
-            return;
-        }
-    }, []);
-
-
-    // useEffect(() => {
-    //     if (isConnected && ethers && address && typeof window !== "undefined" && window.ethereum) {
-    //         const provider = new ethers.providers.Web3Provider(window.ethereum);
-    //         const signer = provider.getSigner();
-    //         const contractInstance = new ethers.Contract(MYIDPresaleAddress, MYIDPresaleABI, signer);
-    //         setProvider(provider);
-    //         setContract(contractInstance);
-    //     }
-    // }, [isConnected, address]);
-
-    useEffect(() => {
         const initializeContract = async () => {
-            if (isConnected && address) {
-                if (window.ethereum && typeof window !== "undefined") {
-                    try {
-                        console.log("STEP1")
-                        const provider = new ethers.providers.Web3Provider(window.ethereum);
-                        await provider.send('eth_requestAccounts', []);
-                        const signer = provider.getSigner();
-                        const userAddress = await signer.getAddress();
-                        console.log("USER ADDRESS:", userAddress)
-                        const contractInstance = new ethers.Contract(MYIDPresaleAddress, MYIDPresaleABI, signer);
-                        setProvider(provider);
-                        setContract(contractInstance);
-                    } catch (error) {
-                        console.log("Error initializing contract with MetaMask", error);
-                    }
+            try {
+                if (!isConnected || !address) return;
+                let detectedProvider = null;
+                if (window.ethereum) {
+                    detectedProvider = new ethers.providers.Web3Provider(window.ethereum);
+                    await detectedProvider.send("eth_requestAccounts", []);
                 } else {
-                    // Fallback to WalletConnect when MetaMask is not detected
-                    try {
-                        console.log("STEP2")
-                        const walletConnectProvider = await EthereumProvider.init({
-                            projectId: constant.projectId,
-                            chains: [constant.chainId as number], // Mainnet
-                            showQrModal: true,
-                        });
-
-                        const provider = new ethers.providers.Web3Provider(walletConnectProvider);
-                        await provider.send('eth_requestAccounts', []);
-                        const signer = provider.getSigner();
-                        const contractInstance = new ethers.Contract(MYIDPresaleAddress, MYIDPresaleABI, signer);
-                        setProvider(provider);
-                        setContract(contractInstance);
-                    } catch (error) {
-                        console.log("Error initializing WalletConnect", error);
-                        alert("No Ethereum provider available. Please install MetaMask.");
-                    }
+                    const walletConnectProvider = await EthereumProvider.init({
+                        projectId: constant.projectId,
+                        chains: [constant.chainId as number],
+                        showQrModal: true,
+                    });
+                    detectedProvider = new ethers.providers.Web3Provider(walletConnectProvider);
                 }
+                const accounts = await detectedProvider.listAccounts();
+                if (!accounts.length) {
+                    alert("No accounts found. Please connect a wallet.");
+                    return;
+                }
+                const network = await detectedProvider.getNetwork();
+                if (network.chainId !== constant.chainId) {
+                    alert("Wrong network detected. Please switch to the correct network.");
+                    return;
+                }
+                const signer = detectedProvider.getSigner();
+                const contractInstance = new ethers.Contract(MYIDPresaleAddress, MYIDPresaleABI, signer);
+                setProvider(detectedProvider);
+                setContract(contractInstance);
+                console.log("Contract initialized:", contractInstance);
+            } catch (error : any) {
+                console.error("Error initializing contract:", error);
+                alert(error?.message || "Error initializing contract. Check the console for details.");
             }
         };
 
