@@ -229,7 +229,7 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                     if (res?.isGas) {
                         console.log("RES DATA:", res.data)
                         const txData = res.data as unknown as { transactionHash: string };
-                        setMessages((prev) => [...prev, { sender: "assistant", message: `Function call executed successfully! <br /> <a target="_blank" href='https://sepolia.etherscan.io/tx/${txData.transactionHash}'>View</a>` }]);
+                        setMessages((prev) => [...prev, { sender: "assistant", message: `Function call executed successfully! <span hidden>${txData.transactionHash}</span>` }]);
                         console.log("RES1:", res.data)
                         setIsCreating(false);
                     }
@@ -324,6 +324,13 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
                                         />
                                     </div>}
                                 </div>
+                                {msg.message.includes("<span hidden>") && <>
+                                    <a href={`https://sepolia.etherscan.io/tx/${getHiddenSpanText(msg.message)}`} target="_blank" rel="noopener noreferrer">
+                                        <div className="approve-btn px-2 py-1 min-w-[5rem] bg-zinc-200 rounded-3xl border-2 border-zinc-200 hover:border-zinc-400 cursor-pointer">
+                                            <h2 className="text-center dark:text-black text-sm">View</h2>
+                                        </div>
+                                    </a>
+                                </>}
                             </div>
                             {isLoading && index === messages.length - 1 && !isCreating && <div className={`whole-div w-full flex items-center gap-1 justify-start px-3`}>
                                 <div className={`relative message p-2 mb-2 flex items-center gap-1 rounded-lg max-w-xs bg-black`}>
