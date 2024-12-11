@@ -227,8 +227,9 @@ const ChatBox: React.FC<Props> = ({ agent }) => {
 
                 if (res?.success) {
                     if (res?.isGas) {
+                        console.log("RES DATA:", res.data)
                         const txData = res.data as unknown as { transactionHash: string };
-                        setMessages((prev) => [...prev, { sender: "assistant", message: `Function call executed successfully! <br /> <a target="_blank" href='https://sepolia.etherscan.io/tx/${txData.transactionHash}'></a>` }]);
+                        setMessages((prev) => [...prev, { sender: "assistant", message: `Function call executed successfully! <br /> <a target="_blank" href='https://sepolia.etherscan.io/tx/${txData.transactionHash}'>View</a>` }]);
                         console.log("RES1:", res.data)
                         setIsCreating(false);
                     }
